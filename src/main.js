@@ -1,33 +1,32 @@
 import { Client, Databases } from "node-appwrite";
 
 export default async ({ req, res, log, error }) => {
-  // Parse request body
-  const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
-
-  const { amount, currency = "usd", customerEmail, customerName } = body;
-
-  // Validate input
-  if (!amount || amount <= 0) {
-    return res.json(
-      {
-        success: false,
-        error: "Invalid amount",
-      },
-      400,
-    );
-  }
-
-  if (!customerEmail || !customerName) {
-    return res.json(
-      {
-        success: false,
-        error: "Customer email and name are required",
-      },
-      400,
-    );
-  }
-
   try {
+    // Parse request body
+    const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+    const { amount, currency = "usd", customerEmail, customerName } = body;
+
+    // Validate input
+    if (!amount || amount <= 0) {
+      return res.json(
+        {
+          success: false,
+          error: "Invalid amount",
+        },
+        400,
+      );
+    }
+
+    if (!customerEmail || !customerName) {
+      return res.json(
+        {
+          success: false,
+          error: "Customer email and name are required",
+        },
+        400,
+      );
+    }
+
     // Import Stripe (dynamically to avoid issues)
     const Stripe = (await import("stripe")).default;
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
