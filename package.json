@@ -1,0 +1,17 @@
+{
+  "name": "create-payment-intent",
+  "version": "1.0.0",
+  "description": "Create Stripe Payment Intent for Foodify App",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "stripe": "^14.0.0",
+    "node-appwrite": "^13.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
